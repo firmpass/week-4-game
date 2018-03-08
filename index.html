@@ -1,67 +1,185 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Super Crystal Collector</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700">
     <link href="https://fonts.googleapis.com/css?family=Mina:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
-    <script src="./assets/javascript/game.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script class="./assets/javascript/game.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
 </head>
+
 <body>
-    
+
     <div class="container">
 
-       <div class="page-header">
-           <h1 style="text-align:center;">The Super Crystal Collector Game</h1>
-       </div>
+        <div class="page-header">
+            <h1 style="text-align:center">Infinty Gem Collector Game</h1>
+        </div>
 
-       <div class="jumbotron">
-           <p style="text-align:center">
-               You will be given a random number at the start of the game. <br>
-               There are four crystals below. By clicking on a crystal you will add a specific
-               amount of points to your total score. <br> You win the game by matching your total
-               score to random number, you lose the game if your total score goes above the random
-               number. <br> The value of each crystal is hidden from you until you click on it. <br>
-               Each time when the game starts, the game will change the values of each crystal.
-           </p>
-           <p style="text-align:center">
-           <button class="btn btn-info" style="">Start</button>
-           </p>    
-       </div>
+        <div class="jumbotron">
+            <p style="text-align:center">
+                You will be given a random number at the start of the game.
+                <br> There are four crystals below. By clicking on a crystal you will add a specific amount of points to your
+                total score.
+                <br> You win the game by matching your total score to random number, you lose the game if your total score goes
+                above the random number.
+                <br> The value of each crystal is hidden from you until you click on it.
+                <br> Each time when the game starts, the game will change the values of each crystal.
+            </p>
+            <p style="text-align:center">
+                <button class="btn btn-info" id="start">Start</button>
+            </p>
+        </div>
 
-       <div class="row">
-            <div class="col-lg-5 panel panel-primary panel panel-default"> 
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Score to Achieve</h3>
-                    </div>
-                    <div class="panel-body">
-                      <h3 id="scoreToachieve">53</h3>
-        
-                  </div>
+        <div class="row">
+            <div class="col-lg-5 panel panel-primary panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Score to Achieve</h3>
+                </div>
+                <div class="panel-body">
+                    <h3 id="scoreToachieve">
+                        <span class="targetNum"> 53</span>
+                    </h3>
+
+                </div>
             </div>
-            <div class="col-lg-1  alert alert-danger" style="height:100px" role="alert">Losses: <span id="losses">0</span></div>
-            <div class="col-lg-1  alert alert-success" style="height:100px" role="alert">Wins:<span id="wins">0</span></div>
-            <div class="col-lg-5 panel panel-info"> 
-                    <div class="panel-heading">
-                            <h3 class="panel-title">Total Score:</h3>
-                          </div>
-                          <div class="panel-body">
-                            <h3 id="total-score">0</h3>
-                        </div>
-            </div>            
-       </div>
+            <div class="col-lg-1  alert alert-danger" style="height:100px" role="alert">Loss:
+                <span id="losses">0</span>
+            </div>
+            <div class="col-lg-1  alert alert-success" style="height:100px" role="alert">Wins:
+                <span id="wins">0</span>
+            </div>
+            <div class="col-lg-5 panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Total Score: </h3>
+                </div>
+                <div class="panel-body">
+                    <h3>
+                        <span class="total-score"> 0</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
 
 
-       <div class="row">
-            <img src="../assets/images/1mind_gem.jpg" alt="">
-            <img src="../assets/images/1power_gem.jpg" alt="">
-            <img src="../assets/images/1reality_gem.jpg" alt="">
-            <img src="../assets/images/1soul_gem.jpg" alt="">
+        <div class="row" id="crystals" style="text-align:center;">
+
+
+        </div>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+
+            var images = [
+                "assets/images/1power_gem.jpg",
+                "assets/images/1mind_gem.jpg",
+                "assets/images/1reality_gem.jpg",
+                "assets/images/1soul_gem.jpg"
+            ];
+            function generateImagesWithRandom() {
+                // TODO
+
+                $("#crystals").empty(); // remove the old ones, and add the new ones
+
+                for (var i = 0; i < 4; i++) {
+                    // TODO
+                    // Run as many times as we're looping
+                    var randomNumber = Math.floor(Math.random() * 12 + 1); // random number
+                    var img = $("<img>"); // <img />
+                    img.attr({
+                        "src": images[i],
+                        "data-value": randomNumber
+                    });
+
+                    $("#crystals").append(img);
+                }
+            }
+
+            generateImagesWithRandom(); // invoking inside the function
+
+
+            //Input random number logic for targetNumber
+            var targetNumber = Math.floor(Math.random() * 120) + 19;
+            //selector for targetNumber
+            $(".targetNum").text(targetNumber);
+
+            var randomNum = randomNumGen();
+
+            var crystals = $("#crystals");
+
+            var counter = 0;
+            var loss = 0;
+            var win = 0;
+            var totalScore = 0;
+            var startGame = start();
+
+            function randomNumGen() {
+                Math.floor(Math.random() * 12) + 1;
+            }
+
+            function start() {
+                $(".targetNum").text(targetNumber);
+                $("#losses").text(loss);
+                $("#wins").text(win);
+                $(".total-score").text(totalScore);
+                $("#crystals").each(function () {
+                    $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
+                });
+                winOrloss();
+            };
+
+           
+
+            $("#start").on('click', function() {
+                start();
+                alert('Avengers mount up!!!');
+            })
+
+            function renderCrystals() {
+                for (var key in crystals) {
+                    var crystalDiv = $("<div class='crystals-button' data-name='" + key + "'>");
+                    var crystalImg = $("<img alt='image' class='crystal-img'>").attr("src", crystals[key].imageUrl);
+                    crystalDiv.append(crystalImg);
+                    $("#crystal-area").append(crystalDiv);
+                }
+            };
+
+
+            $("#crystals img").on('click', function () {
+                var gemValue = $(this).attr("data-value");
+                gemValue = parseInt(gemValue);
+                totalScore += gemValue;
+
+                winOrloss();
+                $(".total-score").text(totalScore);
+
+            });
+
+
+
+            function winOrloss() {
+                // TODO
+
+                    // Check if total score is equal to the target score
+                        // User wins
+                    // Check if total score is greater than target score
+                        // User lost    
+                if (totalScore === targetNumber) {
+                    alert("Avengers win the battle!")
+                    $("#wins").html(win++);
+                }
+                if (totalScore > targetNumber) {
+                    alert("Thanos wins the battle!!!");
+                    $("#losses").html(loss++);
+                }
+            };
 
 
 
@@ -75,8 +193,18 @@
 
 
 
+
+
+
+
+
+
+
+
+        </script>
     </div>
 
 
 </body>
+
 </html>
