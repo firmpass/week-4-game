@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Mina', sans-serif;
-    background-image: url("/Users/ericthornton/gt/week-4-game/assets/images/wp2302395.png");
+    background: url("../images/wp2302395.png");
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;

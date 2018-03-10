@@ -110,7 +110,7 @@
             //Input random number logic for targetNumber
             var targetNumber = Math.floor(Math.random() * 120) + 19;
             //selector for targetNumber
-            $(".targetNum").text(targetNumber);
+            // $(".targetNum").text(targetNumber);
 
             var randomNum = randomNumGen();
 
@@ -125,40 +125,47 @@
             }
 
             function start() {
+                $("#losses").text(0);
+                $("#wins").text(0);
+                targetNumber = Math.floor(Math.random() * 120) + 19;
                 $(".targetNum").text(targetNumber);
-                $(".total-score").text(totalScore);
+                $(".total-score").text(0);
                 $("#crystals").each(function () {
-                    $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
+                $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
                 });
                 winOrloss();
+                gemVal();
                 
             };
 
             start();
 
             function resetGame() {
+                totalScore = 0;
+                targetNumber = Math.floor(Math.random() * 120) + 19;
                 $(".targetNum").text(targetNumber);
-                $("#losses").text(0);
-                $("#wins").text(0);
+                // $("#losses").text(0);
+                // $("#wins").text(0);
                 $(".total-score").text(totalScore);
                 $("#crystals").each(function () {
-                    $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
+                $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
                 })
-                winOrloss();
-                start();
+                gemVal();
+                // winOrloss();
+                // start();
 
             };
 
-           resetGame();
+        //    resetGame();
 
             $("#start").on('click', function() {
-                alert('Avengers mount up!!!');
+                alert('Avengers unite!!!');
                 resetGame();
             })
 
        
 
-
+            function gemVal (){
             $("#crystals img").on('click', function () {
                 var gemValue = $(this).attr("data-value");
                 gemValue = parseInt(gemValue);
@@ -166,10 +173,20 @@
 
                 winOrloss();
                 $(".total-score").text(totalScore);
-
+                console.log(gemVal);
+                
             });
+        };
 
+            // $("#crystals img").on('click', function () {
+            //     var gemValue = $(this).attr("data-value");
+            //     gemValue = parseInt(gemValue);
+            //     totalScore += gemValue;
 
+            //     winOrloss();
+            //     $(".total-score").text(totalScore);
+                
+            // });
 
             function winOrloss() {
                 // TODO
@@ -179,12 +196,14 @@
                     // Check if total score is greater than target score
                         // User lost    
                 if (totalScore == targetNumber) {
-                    alert("Avengers win the battle!")
+                    // alert("Avengers win the battle!");
+                    win++;
                     $("#wins").html(win++);
                     resetGame();
                 }
                 if (totalScore > targetNumber) {
-                    alert("Thanos wins the battle!!!");
+                    // alert("Thanos wins the battle!!!");
+                    loss++;
                     $("#losses").html(loss++);
                     resetGame();
                     
