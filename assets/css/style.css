@@ -12,6 +12,10 @@ body {
 
 h1 {
     color: white;
-    text-shadow: 2px 2px white;
+    text-shadow: 2px 2px blue;
 }
+
+/* .jumbotron {
+   text-shadow: blue 0.5em 0.5em 0.5em;
+} */
 
