@@ -100,6 +100,8 @@
 
                     $("#crystals").append(img);
                 }
+                
+
             }
 
             generateImagesWithRandom(); // invoking inside the function
@@ -118,38 +120,43 @@
             var loss = 0;
             var win = 0;
             var totalScore = 0;
-            var startGame = start();
-
             function randomNumGen() {
                 Math.floor(Math.random() * 12) + 1;
             }
 
             function start() {
                 $(".targetNum").text(targetNumber);
-                $("#losses").text(loss);
-                $("#wins").text(win);
                 $(".total-score").text(totalScore);
                 $("#crystals").each(function () {
                     $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
                 });
                 winOrloss();
+                
             };
 
-           
+            start();
+
+            function resetGame() {
+                $(".targetNum").text(targetNumber);
+                $("#losses").text(0);
+                $("#wins").text(0);
+                $(".total-score").text(totalScore);
+                $("#crystals").each(function () {
+                    $(this).attr("data-value", Math.floor(Math.random() * 12) + 1)
+                })
+                winOrloss();
+                start();
+
+            };
+
+           resetGame();
 
             $("#start").on('click', function() {
-                start();
                 alert('Avengers mount up!!!');
+                resetGame();
             })
 
-            function renderCrystals() {
-                for (var key in crystals) {
-                    var crystalDiv = $("<div class='crystals-button' data-name='" + key + "'>");
-                    var crystalImg = $("<img alt='image' class='crystal-img'>").attr("src", crystals[key].imageUrl);
-                    crystalDiv.append(crystalImg);
-                    $("#crystal-area").append(crystalDiv);
-                }
-            };
+       
 
 
             $("#crystals img").on('click', function () {
@@ -171,15 +178,21 @@
                         // User wins
                     // Check if total score is greater than target score
                         // User lost    
-                if (totalScore === targetNumber) {
+                if (totalScore == targetNumber) {
                     alert("Avengers win the battle!")
                     $("#wins").html(win++);
+                    resetGame();
                 }
                 if (totalScore > targetNumber) {
                     alert("Thanos wins the battle!!!");
                     $("#losses").html(loss++);
+                    resetGame();
+                    
                 }
+            
             };
+
+           
 
 
 
